@@ -1,0 +1,12 @@
+{
+  "name": "FTNDNS AI - Autonomous Network Grid",
+  "description": "Enterprise-grade autonomous network control plane featuring Global DNS mesh, advanced telemetry, ZeroTrust tunneling, and AI-driven predictive operations for FTN Ecosystem.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
