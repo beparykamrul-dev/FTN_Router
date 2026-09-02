@@ -3,6 +3,7 @@ import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 import { Activity, Cpu, HardDrive, Network, AlertTriangle, ShieldCheck, Zap, Server } from 'lucide-react';
 import { mockAlerts } from '../data/mockData';
 import { cn } from '../utils';
+import { GlobalMap } from './GlobalMap';
 
 const PROTOCOL_DATA = [
   { name: 'TCP', value: 65, color: '#00f0ff' },
@@ -161,6 +162,12 @@ export function SmartNocDashboard() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Global Map Overlay */}
+      <div className="glass-panel p-5 rounded-xl border border-gray-800/60 h-96">
+        <h3 className="font-semibold text-gray-200 mb-4">FTN Network Global Grid</h3>
+        <GlobalMap />
       </div>
 
       {/* Protocol, Node Health & Heatmap Grid */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Network, Server, ShieldAlert, Cpu, Activity, Users, FileCode2, Command, Globe, Smartphone, Globe2, RefreshCw, HardDrive, Mail, Search, Lock, Wrench } from 'lucide-react';
+import { Network, Server, ShieldAlert, Cpu, Activity, Users, FileCode2, Command, Globe, Smartphone, Globe2, RefreshCw, HardDrive, Mail, Search, Lock, Wrench, Star, Layers } from 'lucide-react';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -8,13 +8,15 @@ interface CommandPaletteProps {
 }
 
 export const NAV_ITEMS = [
+  { id: 'mystack', label: '🚀 My Stack & Starred Repos (53)', icon: Star },
   { id: 'core-router', label: 'FTN Core Router', icon: Server },
   { id: 'dns', label: 'DNS Management', icon: Globe },
-  { id: 'ddns', label: 'DDNS', icon: RefreshCw },
-  { id: 'domain', label: 'Domain Management', icon: Globe2 },
-  { id: 'hosting', label: 'Hosting Services', icon: HardDrive },
-  { id: 'global', label: 'Global Grid & Web3', icon: Globe },
-  { id: 'mail', label: 'FTN Mail Service', icon: Mail },
+  { id: 'ddns', label: 'DDNS (DuckDNS / DNSPod)', icon: RefreshCw },
+  { id: 'domain', label: 'Domain Management & PKI', icon: Globe2 },
+  { id: 'hosting', label: 'Hosting & PgBouncer Offload', icon: HardDrive },
+  { id: 'global', label: 'Global Grid & Web3 (EVMbench)', icon: Globe },
+  { id: 'mail', label: 'FTN Mail Service & DKIM', icon: Mail },
+  { id: 'ftn-dns', label: 'FTN DNS Architecture', icon: Globe },
   { id: 'android', label: 'Android App & Omni OS', icon: Smartphone },
   { id: 'dashboard', label: 'Smart NOC Dashboard', icon: Activity },
   { id: 'mesh', label: 'Global API & Mesh', icon: Network },
@@ -61,7 +63,7 @@ export function CommandPalette({ isOpen, onClose, onNavigate }: CommandPalettePr
             ref={inputRef}
             type="text"
             className="flex-1 bg-transparent border-none text-white focus:outline-none focus:ring-0 placeholder-gray-500 text-lg font-mono"
-            placeholder="Search modules..."
+            placeholder="Search all modules (fuzzy)..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {
@@ -98,6 +100,9 @@ export function CommandPalette({ isOpen, onClose, onNavigate }: CommandPalettePr
               })}
             </div>
           )}
+        </div>
+        <div className="px-4 py-2 bg-gray-950/50 text-[10px] text-gray-500 font-mono text-center border-t border-gray-800">
+          Use <kbd className="bg-gray-800 px-1 rounded mx-0.5">↑</kbd> <kbd className="bg-gray-800 px-1 rounded mx-0.5">↓</kbd> to navigate, <kbd className="bg-gray-800 px-1 rounded mx-0.5">Enter</kbd> to select, <kbd className="bg-gray-800 px-1 rounded mx-0.5">ESC</kbd> to close
         </div>
       </div>
     </div>

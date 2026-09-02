@@ -19,11 +19,18 @@ import { EdgeTrafficSimulator } from './components/EdgeTrafficSimulator';
 import { HardwareLifecycleManager } from './components/HardwareLifecycleManager';
 import { DeviceDriverManager } from './components/DeviceDriverManager';
 import { ToastSystem } from './components/ToastSystem';
-import { DdnsManager, DomainManager, HostingManager, MailServiceManager, GlobalGridManager } from './components/Placeholders';
+import { DdnsManager } from './components/DdnsManager';
+import { DomainManager } from './components/DomainManager';
+import { HostingManager } from './components/HostingManager';
+import { MailServiceManager } from './components/MailServiceManager';
+import { GlobalGridManager } from './components/GlobalGridManager';
+import { MegaStackMatrix } from './components/MegaStackMatrix';
+import { FtnDnsArchitecture } from './components/FtnDnsArchitecture';
 import { CommandPalette } from './components/CommandPalette';
+import { HealthTicker } from './components/HealthTicker';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('crypto-pki');
+  const [activeTab, setActiveTab] = useState('mystack');
   const [isLightMode, setIsLightMode] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
@@ -48,6 +55,7 @@ function App() {
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'mystack': return <MegaStackMatrix />;
       case 'core-router': return <MikroTikManager />;
       case 'dns': return <DnsManager />;
       case 'ddns': return <DdnsManager />;
@@ -55,6 +63,7 @@ function App() {
       case 'hosting': return <HostingManager />;
       case 'global': return <GlobalGridManager />;
       case 'mail': return <MailServiceManager />;
+      case 'ftn-dns': return <FtnDnsArchitecture />;
       case 'android': return <OmniBuilder />;
       case 'dashboard': return <SmartNocDashboard />;
       case 'mesh': return <ApiGatewayMesh />;
@@ -70,12 +79,17 @@ function App() {
       case 'ai': return <AiAssistant />;
       case 'microservices': return <MicroservicesMatrix />;
       case 'compiler': return <CompilerPipelineView />;
-      default: return <CryptoPkiManager />;
+      default: return <MegaStackMatrix />;
     }
   };
 
   return (
-    <div className={`flex h-screen bg-[#05070a] overflow-hidden text-gray-100 font-sans selection:bg-[#00f0ff]/30 ${isLightMode ? 'theme-light' : ''}`}>
+    <div className={`flex h-screen bg-[#05070a] overflow-hidden text-gray-100 font-sans selection:bg-[#00f0ff]/30 ${isLightMode ? 'theme-light' : ''} relative`}>
+      {/* FTN Watermark */}
+      <div className="absolute inset-0 pointer-events-none animate-subtle-pulse flex items-center justify-center overflow-hidden">
+        <span className="font-display font-black text-[30vw] select-none text-white whitespace-nowrap">FTN</span>
+      </div>
+      
       {/* Background gradients managed in index.css */}
       <CommandPalette 
         isOpen={isCommandPaletteOpen} 
@@ -92,6 +106,7 @@ function App() {
           toggleTheme={() => setIsLightMode(!isLightMode)} 
           openCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
+        <HealthTicker />
         
         <main className="flex-1 overflow-y-auto p-6 md:p-8">
           <div className="max-w-7xl mx-auto">

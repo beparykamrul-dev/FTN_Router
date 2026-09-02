@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Globe, Server, Activity, ShieldCheck, Zap } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { DnsTopologyView } from './DnsTopologyView';
 
 const REGIONS = ['North America', 'Europe', 'Asia-Pacific', 'South America', 'Africa', 'Middle East'];
 const TIME_SLOTS = Array.from({ length: 24 }, (_, i) => `T-${24 - i}m`);
@@ -47,6 +48,10 @@ export function DnsManager() {
           <p className="text-gray-400 font-mono mt-1 text-sm">Anycast Node Latency & Global Route Heatmap</p>
         </div>
         <div className="flex items-center gap-3">
+          <button className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-500 rounded-lg font-mono text-sm transition-colors flex items-center gap-2">
+            <Zap className="w-4 h-4" />
+            Emergency Kill Switch
+          </button>
           <button className="px-4 py-2 bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 border border-[#00f0ff]/30 text-[#00f0ff] rounded-lg font-mono text-sm transition-colors">
             Force Global Sync
           </button>
@@ -100,6 +105,29 @@ export function DnsManager() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* DNS Topology View */}
+      <DnsTopologyView />
+
+      {/* DNS Policy Editor */}
+      <div className="glass-panel p-6 rounded-xl border border-gray-800/60">
+        <h3 className="text-lg font-semibold text-white mb-4">DNS Policy Editor</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-sm text-gray-300">
+            <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                <label className="block mb-2">Load Balancing Strategy</label>
+                <select className="w-full bg-gray-950 border border-gray-800 p-2 rounded text-white">
+                    <option>Round Robin</option>
+                    <option>Latency-based</option>
+                    <option>Geographic</option>
+                </select>
+            </div>
+            <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                <label className="block mb-2">Failover Trigger Threshold</label>
+                <input type="number" defaultValue={500} className="w-full bg-gray-950 border border-gray-800 p-2 rounded text-white" />
+                <span className="text-[10px] text-gray-500">Latency in ms before failover</span>
+            </div>
         </div>
       </div>
 

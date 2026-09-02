@@ -26,6 +26,14 @@
     text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
   }
   
+  @keyframes subtle-pulse {
+    0%, 100% { opacity: 0.03; }
+    50% { opacity: 0.06; }
+  }
+  .animate-subtle-pulse {
+    animation: subtle-pulse 4s ease-in-out infinite;
+  }
+  
   /* Scrollbar styles */
   ::-webkit-scrollbar {
     width: 6px;
