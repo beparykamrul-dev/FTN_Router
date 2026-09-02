@@ -3,7 +3,9 @@ import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 import { Activity, Cpu, HardDrive, Network, AlertTriangle, ShieldCheck, Zap, Server } from 'lucide-react';
 import { mockAlerts } from '../data/mockData';
 import { cn } from '../utils';
-import { GlobalMap } from './GlobalMap';
+import { SecurityCompliancePanel } from './SecurityCompliancePanel';
+import { EdgePacketInspector } from './EdgePacketInspector';
+import { DnsTopologyView } from './DnsTopologyView';
 
 const PROTOCOL_DATA = [
   { name: 'TCP', value: 65, color: '#00f0ff' },
@@ -162,6 +164,15 @@ export function SmartNocDashboard() {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <EdgePacketInspector />
+        <SecurityCompliancePanel />
+      </div>
+
+      <div className="grid grid-cols-1 gap-6">
+         <DnsTopologyView />
       </div>
 
       {/* Global Map Overlay */}

@@ -1,5 +1,4 @@
-import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { describe, it, expect } from "vitest";
 import { createRoutingModeController } from "./routing-mode";
 import type { RouteMutation } from "./routing-control-port";
 
@@ -12,31 +11,31 @@ describe("RoutingModeController", () => {
     let calls = 0;
     const controller = createRoutingModeController({ apply: async () => { calls++; } });
     const result = await controller.execute({ mode: "AUTO", mutation, policy: allowed, emergencyStop: true });
-    assert.equal(result.approved, false);
-    assert.equal(calls, 0);
+    expect(result.approved).toBe(false);
+    expect(calls).toBe(0);
   });
 
   it("blocks AUTO when policy is denied", async () => {
     let calls = 0;
     const controller = createRoutingModeController({ apply: async () => { calls++; } });
     const result = await controller.execute({ mode: "AUTO", mutation, policy: denied });
-    assert.equal(result.approved, false);
-    assert.equal(calls, 0);
+    expect(result.approved).toBe(false);
+    expect(calls).toBe(0);
   });
 
   it("allows MANUAL after explicit policy approval", async () => {
     let calls = 0;
     const controller = createRoutingModeController({ apply: async () => { calls++; } });
     const result = await controller.execute({ mode: "MANUAL", mutation, policy: allowed });
-    assert.equal(result.approved, true);
-    assert.equal(calls, 1);
+    expect(result.approved).toBe(true);
+    expect(calls).toBe(1);
   });
 
   it("allows AUTO only after policy approval", async () => {
     let calls = 0;
     const controller = createRoutingModeController({ apply: async () => { calls++; } });
     const result = await controller.execute({ mode: "AUTO", mutation, policy: allowed });
-    assert.equal(result.approved, true);
-    assert.equal(calls, 1);
+    expect(result.approved).toBe(true);
+    expect(calls).toBe(1);
   });
 });
