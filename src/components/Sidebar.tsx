@@ -25,7 +25,9 @@ import {
   Shield,
   FileText,
   Sparkles,
-  GitBranch
+  GitBranch,
+  ShieldAlert,
+  TrendingUp
 } from 'lucide-react';
 import { cn } from '../utils';
 
@@ -60,6 +62,10 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
 ];
 
 export const EXTENDED_MODULES: NavItem[] = [
+  { id: 'identity-control-center', label: 'Identity & Kill Session', icon: ShieldAlert, badge: 'IAM', badgeColor: 'bg-red-500/20 text-red-400 border border-red-500/40' },
+  { id: 'capacity-forecaster', label: 'Capacity & AI Planner', icon: TrendingUp, badge: 'AUTO', badgeColor: 'bg-purple-500/20 text-purple-400 border border-purple-500/40' },
+  { id: 'security-compliance-engine', label: 'RPKI & ZeroTrust Audit', icon: ShieldCheck, badge: '100%', badgeColor: 'bg-emerald-500/20 text-[#00ff66] border border-emerald-500/40' },
+  { id: 'anycast-mesh-explorer', label: 'Anycast D3 Globe Explorer', icon: Globe, badge: 'BGP', badgeColor: 'bg-cyan-500/20 text-[#00f0ff] border border-cyan-500/40' },
   { id: 'setup-wizard', label: 'Admin Setup Wizard', icon: Sparkles, badge: 'GUIDE', badgeColor: 'bg-cyan-500/20 text-[#00f0ff] border border-cyan-500/40' },
   { id: 'ecosystem-visualizer', label: 'Ecosystem Visualizer', icon: GitBranch, badge: 'MESH', badgeColor: 'bg-purple-500/20 text-purple-400 border border-purple-500/40' },
   { id: 'ecosystem-glossary', label: 'Ecosystem Glossary & Specs', icon: BookOpen },

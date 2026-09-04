@@ -42,7 +42,8 @@ import {
   BellRing,
   Flame,
   Zap,
-  LayoutDashboard
+  LayoutDashboard,
+  TrendingUp
 } from 'lucide-react';
 import { INITIAL_IP_POOLS } from '../data/ipamData';
 import { INITIAL_JOBS } from '../data/jobJournalData';
@@ -67,6 +68,10 @@ interface CommandPaletteProps {
 
 export const NAV_ITEMS = [
   { id: 'dashboard', label: '🎛️ FTN Core Control Plane (Global Autonomous NOC)', icon: LayoutDashboard },
+  { id: 'identity-control-center', label: '🛡️ FTN Identity & Access Control Center (mTLS & Kill Session)', icon: ShieldAlert },
+  { id: 'capacity-forecaster', label: '📈 FTN Capacity Forecaster & AI Proactive Scaling (InfluxDB)', icon: TrendingUp },
+  { id: 'security-compliance-engine', label: '🏆 FTN Security & RPKI Compliance Engine (ZeroTrust)', icon: ShieldCheck },
+  { id: 'anycast-mesh-explorer', label: '🌍 FTN Anycast DNS Mesh Explorer (Interactive 3D D3 Globe)', icon: Globe },
   { id: 'setup-wizard', label: '🚀 FTN Admin Setup Wizard (Service Onboarding & PKI)', icon: Sparkles },
   { id: 'ecosystem-visualizer', label: '🌐 FTN Ecosystem Visualizer (Node-Link Topology)', icon: Network },
   { id: 'ecosystem-glossary', label: '📖 FTN Ecosystem Glossary & Architecture Taxonomy', icon: BookOpen },
