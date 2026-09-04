@@ -41,7 +41,8 @@ import {
   BookOpen,
   BellRing,
   Flame,
-  Zap
+  Zap,
+  LayoutDashboard
 } from 'lucide-react';
 import { INITIAL_IP_POOLS } from '../data/ipamData';
 import { INITIAL_JOBS } from '../data/jobJournalData';
