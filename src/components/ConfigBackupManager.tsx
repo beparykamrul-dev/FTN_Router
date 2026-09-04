@@ -15,7 +15,7 @@ const mockBackups: BackupSnapshot[] = [
   { id: 'snap-8x9q', timestamp: '2026-08-28 09:00:00', size: '4.2 MB', type: 'full', status: 'verified', encryption: 'AES-256-GCM' },
   { id: 'snap-1c4z', timestamp: '2026-08-21 09:00:00', size: '4.1 MB', type: 'full', status: 'verified', encryption: 'AES-256-GCM' },
   { id: 'snap-9m2p', timestamp: '2026-08-14 09:00:00', size: '3.9 MB', type: 'full', status: 'verified', encryption: 'AES-256-GCM' },
-  { id: 'snap-2f8r', timestamp: '2026-08-07 09:00:00', size: '3.9 MB', type: 'verified', status: 'verified', encryption: 'AES-256-GCM' } as BackupSnapshot, // Cast for safety if type mismatch
+  { id: 'snap-2f8r', timestamp: '2026-08-07 09:00:00', size: '3.9 MB', type: 'full', status: 'verified', encryption: 'AES-256-GCM' },
 ];
 
 export function ConfigBackupManager() {

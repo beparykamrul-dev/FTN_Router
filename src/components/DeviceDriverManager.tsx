@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Wrench, HardDrive, DownloadCloud, UploadCloud, CheckCircle2, AlertTriangle, RotateCcw, Cpu, Server, Activity, Search, Settings2, ShieldAlert } from 'lucide-react';
+import { Wrench, HardDrive, DownloadCloud, UploadCloud, CheckCircle2, AlertTriangle, RotateCcw, Cpu, Server, Activity, Search, Settings2, ShieldAlert, RefreshCw } from 'lucide-react';
 import { cn } from '../utils';
 
 const mockDevices = [

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Network, Server, ShieldAlert, Cpu, Activity, Users, FileCode2, Command, Globe, Smartphone, Globe2, RefreshCw, HardDrive, Mail, Search, Lock, Wrench, Star, Layers } from 'lucide-react';
+import { Network, Server, ShieldAlert, Cpu, Activity, Users, FileCode2, Command, Globe, Smartphone, Globe2, RefreshCw, HardDrive, Mail, Search, Lock, Wrench, Star, Layers, Phone, CreditCard, Bot, Radio, Database, DollarSign, ShieldCheck, Sparkles, Cloud, ArrowRightLeft } from 'lucide-react';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -8,7 +8,19 @@ interface CommandPaletteProps {
 }
 
 export const NAV_ITEMS = [
-  { id: 'mystack', label: '🚀 My Stack & Starred Repos (53)', icon: Star },
+  { id: 'architecture', label: '🏛️ FTN Complete Service Architecture (18 Domains)', icon: Layers },
+  { id: 'job-journal', label: '📜 FTN Job Execution Journal (Autonomous)', icon: Activity },
+  { id: 'audit-system', label: '🔒 FTN Audit & Compliance System (Immutable)', icon: Lock },
+  { id: 'ipam-manager', label: '🌐 FTN IPAM & Subnet Manager (OLT/Router)', icon: Network },
+  { id: 'policy-engine', label: '🛡️ FTN Network Access Policy Engine (eBPF)', icon: ShieldAlert },
+  { id: 'cdn-edge', label: '🌍 Global CDN & Edge Anycast (Free Tier)', icon: Cloud },
+  { id: 'sdwan-controller', label: '↔️ FTN SD-WAN Controller (Secure Mesh)', icon: ArrowRightLeft },
+  { id: 'branding', label: '🎨 FTN Logo & Brand Identity Kit', icon: Sparkles },
+  { id: 'shared-auth', label: '🛡️ FTN Shared Auth (One ID)', icon: ShieldCheck },
+  { id: 'mystack', label: '🚀 My Stack & Starred Repos (56)', icon: Star },
+  { id: 'kismet', label: '📡 Kismet Wireless & RF Inspector', icon: Radio },
+  { id: 'kopia', label: '🔐 Kopia Encrypted Backup Vault', icon: HardDrive },
+  { id: 'opensearch', label: '🔍 OpenSearch Observability & SIEM', icon: Database },
   { id: 'core-router', label: 'FTN Core Router', icon: Server },
   { id: 'dns', label: 'DNS Management', icon: Globe },
   { id: 'ddns', label: 'DDNS (DuckDNS / DNSPod)', icon: RefreshCw },
@@ -17,6 +29,10 @@ export const NAV_ITEMS = [
   { id: 'global', label: 'Global Grid & Web3 (EVMbench)', icon: Globe },
   { id: 'mail', label: 'FTN Mail Service & DKIM', icon: Mail },
   { id: 'ftn-dns', label: 'FTN DNS Architecture', icon: Globe },
+  { id: 'ai-accounting', label: 'AI Autonomous Accounting', icon: DollarSign },
+  { id: 'ai-call-center', label: 'AI Call Center', icon: Phone },
+  { id: 'ai-billing', label: 'AI Billing Gateway', icon: CreditCard },
+  { id: 'ai-network-agent', label: 'AI Network Agent', icon: Bot },
   { id: 'android', label: 'Android App & Omni OS', icon: Smartphone },
   { id: 'dashboard', label: 'Smart NOC Dashboard', icon: Activity },
   { id: 'mesh', label: 'Global API & Mesh', icon: Network },

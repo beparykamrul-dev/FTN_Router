@@ -5,13 +5,32 @@ interface NavbarProps {
   isLightMode?: boolean;
   toggleTheme?: () => void;
   openCommandPalette?: () => void;
+  onOpenSharedAuth?: () => void;
+  onOpenBrandKit?: () => void;
 }
 
-export function Navbar({ isLightMode, toggleTheme, openCommandPalette }: NavbarProps) {
+export function Navbar({ isLightMode, toggleTheme, openCommandPalette, onOpenSharedAuth, onOpenBrandKit }: NavbarProps) {
   return (
     <header className="h-16 glass-panel border-b border-gray-800/50 flex items-center justify-between px-6 z-10 relative">
       <div className="flex items-center gap-4 flex-1">
-        <div className="relative w-96 hidden md:block">
+        <button
+          onClick={onOpenBrandKit}
+          className="flex items-center gap-2.5 p-1.5 px-2.5 rounded-xl bg-gray-900/80 hover:bg-gray-800 border border-gray-700/60 hover:border-[#00ff66]/60 transition-all group cursor-pointer"
+          title="FTN Family Time Network - Official Brand Kit & Guidelines"
+        >
+          <div className="w-7 h-7 rounded-md overflow-hidden bg-[#0a1128] border border-gray-700 group-hover:border-[#00ff66] transition-colors flex items-center justify-center">
+            <img src="/ftn-logo.png" alt="FTN Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+          </div>
+          <div className="hidden sm:flex flex-col text-left">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs font-bold text-gray-200 group-hover:text-white font-display">FTN BRAND</span>
+              <span className="text-[8px] px-1 py-0.2 rounded bg-[#00ff66]/10 text-[#00ff66] font-mono border border-[#00ff66]/30">3D</span>
+            </div>
+            <span className="text-[9px] text-[#00f0ff] font-mono leading-none">Family Time Net</span>
+          </div>
+        </button>
+
+        <div className="relative w-80 lg:w-96 hidden md:block">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
           <input 
             type="text" 
@@ -57,15 +76,22 @@ export function Navbar({ isLightMode, toggleTheme, openCommandPalette }: NavbarP
             <Terminal className="w-5 h-5" />
           </button>
           
-          <div className="flex items-center gap-3 pl-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-800 to-gray-700 border border-gray-600 flex items-center justify-center overflow-hidden">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin&backgroundColor=transparent" alt="Admin" className="w-full h-full object-cover opacity-80" />
+          <button
+            onClick={onOpenSharedAuth}
+            className="flex items-center gap-3 pl-2 group hover:bg-gray-800/40 p-1.5 rounded-xl transition-all cursor-pointer border border-transparent hover:border-gray-700/60"
+            title="Open FTN Shared Authentication & Service Federation"
+          >
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-800 to-gray-700 border border-gray-600 group-hover:border-[#00ff66] flex items-center justify-center overflow-hidden transition-colors">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kamrul&backgroundColor=transparent" alt="Admin" className="w-full h-full object-cover opacity-90" />
             </div>
             <div className="hidden sm:flex flex-col text-left">
-              <span className="text-sm font-semibold text-gray-200">System Admin</span>
-              <span className="text-[10px] text-[#00f0ff] font-mono">AS12345</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-semibold text-gray-200 group-hover:text-[#00ff66] transition-colors">Kamrul Bepary</span>
+                <span className="text-[9px] px-1 py-0.2 rounded bg-[#00ff66]/10 text-[#00ff66] font-mono border border-[#00ff66]/30">One ID</span>
+              </div>
+              <span className="text-[10px] text-[#00f0ff] font-mono">FTN Shared Auth</span>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </header>

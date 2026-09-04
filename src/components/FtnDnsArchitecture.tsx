@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, Server, ShieldCheck, Database, LayoutDashboard, Zap, Network, Radio } from 'lucide-react';
+import { Globe, Server, ShieldCheck, Database, LayoutDashboard, Zap, Network, Radio, Activity } from 'lucide-react';
 
 export function FtnDnsArchitecture() {
   const layers = [

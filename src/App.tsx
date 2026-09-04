@@ -26,11 +26,27 @@ import { MailServiceManager } from './components/MailServiceManager';
 import { GlobalGridManager } from './components/GlobalGridManager';
 import { MegaStackMatrix } from './components/MegaStackMatrix';
 import { FtnDnsArchitecture } from './components/FtnDnsArchitecture';
+import { AiCallCenter } from './components/AiCallCenter';
+import { AiBillingGateway } from './components/AiBillingGateway';
+import { AiNetworkAgent } from './components/AiNetworkAgent';
+import { AiAccountingSystem } from './components/AiAccountingSystem';
+import { KismetWirelessInspector } from './components/KismetWirelessInspector';
+import { KopiaBackupManager } from './components/KopiaBackupManager';
+import { OpenSearchAnalytics } from './components/OpenSearchAnalytics';
+import { FtnSharedAuthUi } from './components/FtnSharedAuthUi';
+import { FtnBrandKit } from './components/FtnBrandKit';
+import { CdnEdgeManager } from './components/CdnEdgeManager';
+import { FtnSdWanController } from './components/FtnSdWanController';
+import { FtnServiceArchitecture } from './components/FtnServiceArchitecture';
+import { FtnJobJournal } from './components/FtnJobJournal';
+import { FtnAuditSystem } from './components/FtnAuditSystem';
+import { FtnIpamManager } from './components/FtnIpamManager';
+import { FtnPolicyEngine } from './components/FtnPolicyEngine';
 import { CommandPalette } from './components/CommandPalette';
 import { HealthTicker } from './components/HealthTicker';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('mystack');
+  const [activeTab, setActiveTab] = useState('architecture');
   const [isLightMode, setIsLightMode] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
@@ -53,9 +69,61 @@ function App() {
     }
   }, [isLightMode]);
 
+  const handleServiceNavigation = (serviceId: string) => {
+    switch (serviceId) {
+      case 'ftn-core-noc':
+        setActiveTab('core-router');
+        break;
+      case 'ftn-opensearch-siem':
+        setActiveTab('opensearch');
+        break;
+      case 'ftn-personal-vault':
+        setActiveTab('kopia');
+        break;
+      case 'ftn-kismet-rf':
+        setActiveTab('kismet');
+        break;
+      case 'ftn-ai-accounting':
+        setActiveTab('ai-accounting');
+        break;
+      case 'ftn-wireguard-mesh':
+        setActiveTab('android');
+        break;
+      case 'ftn-family-safeguard':
+        setActiveTab('dns');
+        break;
+      case 'ftn-family-voip':
+        setActiveTab('ai-call-center');
+        break;
+      case 'ftn-web3-evm':
+        setActiveTab('global');
+        break;
+      default:
+        setActiveTab('dashboard');
+        break;
+    }
+  };
+
   const renderContent = () => {
     switch (activeTab) {
+      case 'architecture': return <FtnServiceArchitecture />;
+      case 'job-journal': return <FtnJobJournal />;
+      case 'audit-system': return <FtnAuditSystem />;
+      case 'ipam-manager': return <FtnIpamManager />;
+      case 'policy-engine': return <FtnPolicyEngine />;
+      case 'cdn-edge': return <CdnEdgeManager />;
+      case 'sdwan-controller': return <FtnSdWanController />;
+      case 'branding': return <FtnBrandKit />;
+      case 'shared-auth': return (
+        <FtnSharedAuthUi 
+          onNavigateToService={handleServiceNavigation} 
+          onNavigateToBrandKit={() => setActiveTab('branding')}
+        />
+      );
       case 'mystack': return <MegaStackMatrix />;
+      case 'kismet': return <KismetWirelessInspector />;
+      case 'kopia': return <KopiaBackupManager />;
+      case 'opensearch': return <OpenSearchAnalytics />;
       case 'core-router': return <MikroTikManager />;
       case 'dns': return <DnsManager />;
       case 'ddns': return <DdnsManager />;
@@ -64,6 +132,10 @@ function App() {
       case 'global': return <GlobalGridManager />;
       case 'mail': return <MailServiceManager />;
       case 'ftn-dns': return <FtnDnsArchitecture />;
+      case 'ai-accounting': return <AiAccountingSystem />;
+      case 'ai-call-center': return <AiCallCenter />;
+      case 'ai-billing': return <AiBillingGateway />;
+      case 'ai-network-agent': return <AiNetworkAgent />;
       case 'android': return <OmniBuilder />;
       case 'dashboard': return <SmartNocDashboard />;
       case 'mesh': return <ApiGatewayMesh />;
@@ -105,6 +177,8 @@ function App() {
           isLightMode={isLightMode} 
           toggleTheme={() => setIsLightMode(!isLightMode)} 
           openCommandPalette={() => setIsCommandPaletteOpen(true)}
+          onOpenSharedAuth={() => setActiveTab('shared-auth')}
+          onOpenBrandKit={() => setActiveTab('branding')}
         />
         <HealthTicker />
         

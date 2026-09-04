@@ -6,6 +6,8 @@ import { cn } from '../utils';
 import { SecurityCompliancePanel } from './SecurityCompliancePanel';
 import { EdgePacketInspector } from './EdgePacketInspector';
 import { DnsTopologyView } from './DnsTopologyView';
+import { GlobalMap } from './GlobalMap';
+import { TrafficProtocolOptimizer } from './TrafficProtocolOptimizer';
 
 const PROTOCOL_DATA = [
   { name: 'TCP', value: 65, color: '#00f0ff' },
@@ -165,6 +167,8 @@ export function SmartNocDashboard() {
           </div>
         </div>
       </div>
+
+      <TrafficProtocolOptimizer />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <EdgePacketInspector />

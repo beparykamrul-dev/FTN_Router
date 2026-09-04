@@ -13,16 +13,28 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
 
   return (
     <aside className="w-64 bg-gray-900/80 backdrop-blur-xl border-r border-gray-800/50 flex flex-col h-full flex-shrink-0 z-20">
-      <div className="h-16 flex items-center px-6 border-b border-gray-800/50">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded bg-gradient-to-br from-[#00ff66] to-[#00f0ff] flex items-center justify-center shadow-[0_0_15px_rgba(0,255,102,0.4)]">
-            <Network className="w-5 h-5 text-gray-950" />
+      <div className="h-16 flex items-center px-4 border-b border-gray-800/50">
+        <button 
+          onClick={() => setActiveTab('branding')}
+          className="flex items-center gap-3 w-full text-left p-1.5 rounded-xl hover:bg-gray-800/40 transition-colors group cursor-pointer"
+          title="Open FTN Official Brand Kit & Media Assets"
+        >
+          <div className="w-10 h-10 rounded-lg overflow-hidden border border-[#00ff66]/40 shadow-[0_0_12px_rgba(0,255,102,0.25)] flex-shrink-0 bg-[#0a1128] group-hover:scale-105 transition-transform">
+            <img 
+              src="/ftn-logo.png" 
+              alt="FTN Logo" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
           </div>
-          <div className="flex flex-col">
-            <span className="font-display font-bold text-lg leading-tight tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">FTNDNS</span>
-            <span className="text-[10px] text-[#00ff66] font-mono tracking-widest uppercase">Grid Engine</span>
+          <div className="flex flex-col min-w-0">
+            <div className="flex items-center gap-1.5">
+              <span className="font-display font-bold text-base leading-tight tracking-wider text-white group-hover:text-[#00ff66] transition-colors truncate">FTN</span>
+              <span className="text-[9px] px-1 py-0.2 rounded bg-[#00ff66]/10 text-[#00ff66] font-mono border border-[#00ff66]/30">v3.8</span>
+            </div>
+            <span className="text-[10px] text-gray-400 font-mono tracking-wider truncate">Family Time Net</span>
           </div>
-        </div>
+        </button>
       </div>
 
       <div className="flex-1 overflow-y-auto py-6 px-4 space-y-2">

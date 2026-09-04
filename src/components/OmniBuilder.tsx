@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Smartphone, Monitor, Disc, Shield, Cpu, Activity, Play, CheckCircle2, Server, HardDrive } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Smartphone, Monitor, Disc, Shield, Cpu, Activity, Play, CheckCircle2, Server, HardDrive, RefreshCw } from 'lucide-react';
 import { cn } from '../utils';
 
 type BuildTarget = 'ANDROID' | 'EXE' | 'ISO' | 'FIREWALL';
@@ -8,6 +8,31 @@ export function OmniBuilder() {
   const [target, setTarget] = useState<BuildTarget>('ANDROID');
   const [isBuilding, setIsBuilding] = useState(false);
   const [buildStep, setBuildStep] = useState(0);
+  const [androidStatus, setAndroidStatus] = useState<any>(null);
+  const [isLoadingAndroidStatus, setIsLoadingAndroidStatus] = useState(false);
+
+  const fetchAndroidStatus = async () => {
+    setIsLoadingAndroidStatus(true);
+    try {
+      const res = await fetch('/api/v1/ftn/android/status', {
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setAndroidStatus(data);
+      }
+    } catch (e: any) {
+      setAndroidStatus({ error: e.message });
+    } finally {
+      setIsLoadingAndroidStatus(false);
+    }
+  };
+
+  useEffect(() => {
+    if (target === 'ANDROID') {
+      fetchAndroidStatus();
+    }
+  }, [target]);
 
   const startBuild = () => {
     setIsBuilding(true);
@@ -153,6 +178,44 @@ export function OmniBuilder() {
                </div>
              )}
           </div>
+
+          {target === 'ANDROID' && (
+            <div className="glass-panel p-5 rounded-xl border border-gray-800 bg-gray-950/80 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Smartphone className="w-4 h-4 text-[#00f0ff]" />
+                  <span className="text-sm font-semibold text-white">Flutter Mobile Client (FTNEnterpriseApp)</span>
+                  <span className="text-[10px] bg-[#00ff66]/10 text-[#00ff66] border border-[#00ff66]/30 px-2 py-0.5 rounded font-mono">
+                    /api/v1/ftn/android/status
+                  </span>
+                </div>
+                <button
+                  onClick={fetchAndroidStatus}
+                  className="p-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+                  title="Refresh status"
+                >
+                  <RefreshCw className={cn("w-3.5 h-3.5", isLoadingAndroidStatus && "animate-spin text-[#00f0ff]")} />
+                </button>
+              </div>
+
+              {androidStatus && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+                  <div className="p-2.5 rounded-lg bg-gray-900 border border-gray-800">
+                    <span className="text-gray-500 block text-[10px]">SERVICE STATUS</span>
+                    <span className="text-[#00ff66] font-semibold">{androidStatus.service} - {androidStatus.status}</span>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-gray-900 border border-gray-800">
+                    <span className="text-gray-500 block text-[10px]">INTEGRATED MODULES</span>
+                    <span className="text-[#00f0ff] font-semibold">{androidStatus.tools?.length ?? 0} Modules Reported</span>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-gray-900 border border-gray-800">
+                    <span className="text-gray-500 block text-[10px]">TRANSPORT PROTOCOL</span>
+                    <span className="text-purple-400 font-semibold">{androidStatus.protocol ?? 'WireGuard/QUIC'}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
       </div>

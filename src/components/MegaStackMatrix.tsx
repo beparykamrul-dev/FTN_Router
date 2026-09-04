@@ -3,7 +3,7 @@ import {
   Server, Network, Shield, Cpu, Activity, Globe, Globe2, 
   Terminal, Database, Play, Pause, Download, CheckCircle2, 
   AlertTriangle, Filter, Sparkles, Copy, Check, Info, 
-  Zap, Star, GitBranch, ArrowUpRight, Search, Layers, Radio, ShieldCheck, HardDrive
+  Zap, Star, GitBranch, ArrowUpRight, Search, Layers, Radio, ShieldCheck, HardDrive, Sliders
 } from 'lucide-react';
 import { STACK_REPOSITORIES, PROTOCOL_COMPARISONS, STACK_LISTS, RepoItem, ProtocolComparison } from '../data/stackData';
 import { cn } from '../utils';

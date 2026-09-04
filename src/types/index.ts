@@ -62,3 +62,47 @@ export interface Subscriber {
   rxBytes: number;
   txBytes: number;
 }
+
+export type FtnServiceCategory = 'all' | 'personal' | 'family' | 'enterprise';
+
+export interface FtnRegisteredService {
+  id: string;
+  category: 'personal' | 'family' | 'enterprise';
+  categoryLabel: string;
+  name: string;
+  tagline: string;
+  description: string;
+  status: 'OPERATIONAL' | 'DEGRADED' | 'MAINTENANCE';
+  endpoint: string;
+  accessTier: string;
+  icon: string;
+  requiredRole: string[];
+  latencyMs: number;
+  healthScore: number;
+  activeNodes: number;
+}
+
+export interface FtnIdentity {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  familyScope: string;
+  ssoIdentity: string;
+  mfaMethod: string;
+  avatar: string;
+  lastLogin: string;
+  provisionedServiceIds: string[];
+}
+
+export interface FtnAuthSessionResponse {
+  authenticated: boolean;
+  identity: FtnIdentity | null;
+  provisionedServiceIds: string[];
+  policy: {
+    selfRegistration: string;
+    provisioningAuthority: string;
+    storage: string;
+  };
+}
+
