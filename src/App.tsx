@@ -39,16 +39,45 @@ import { CdnEdgeManager } from './components/CdnEdgeManager';
 import { FtnSdWanController } from './components/FtnSdWanController';
 import { FtnServiceArchitecture } from './components/FtnServiceArchitecture';
 import { FtnJobJournal } from './components/FtnJobJournal';
-import { FtnAuditSystem } from './components/FtnAuditSystem';
 import { FtnIpamManager } from './components/FtnIpamManager';
 import { FtnPolicyEngine } from './components/FtnPolicyEngine';
+import { FtnAccessControlMatrix } from './components/FtnAccessControlMatrix';
+import { FtnTelemetryDashboard } from './components/FtnTelemetryDashboard';
+import { FtnRouterAutomation } from './components/FtnRouterAutomation';
+import { FtnSmartDnsManager } from './components/FtnSmartDnsManager';
+import { FtnAiPredictiveNoc } from './components/FtnAiPredictiveNoc';
+import { FtnProvisioningWizard } from './components/FtnProvisioningWizard';
+import { FtnBgpTrafficVisualizer } from './components/FtnBgpTrafficVisualizer';
+import { FtnProtocolSelector } from './components/FtnProtocolSelector';
+import { FtnTunnelHealthWidget } from './components/FtnTunnelHealthWidget';
+import { FtnAiDynamicProxy } from './components/FtnAiDynamicProxy';
+import { FtnDynamicVpnMesh } from './components/FtnDynamicVpnMesh';
+import { FtnServiceRegistry } from './components/FtnServiceRegistry';
+import { FtnStatusPage } from './components/FtnStatusPage';
+import { FtnMultiServerMesh } from './components/FtnMultiServerMesh';
+import { FtnScalingController } from './components/FtnScalingController';
+import { FtnResourceDashboard } from './components/FtnResourceDashboard';
+import { FtnSmartAlertEngine } from './components/FtnSmartAlertEngine';
+import { FtnGlobalMonitoringHub } from './components/FtnGlobalMonitoringHub';
+import { FtnMigrationJournal } from './components/FtnMigrationJournal';
+import { FtnAiAnomalyPredictor } from './components/FtnAiAnomalyPredictor';
+import { FtnGlobalNetworkHeatmap } from './components/FtnGlobalNetworkHeatmap';
+import { FtnSmartGridOptimizer } from './components/FtnSmartGridOptimizer';
+import { FtnEcosystemGlossary } from './components/FtnEcosystemGlossary';
+import { FtnAiIncidentCorrelator } from './components/FtnAiIncidentCorrelator';
+import { FtnZeroTrustGateway } from './components/FtnZeroTrustGateway';
+import { FtnNetFlowCollector } from './components/FtnNetFlowCollector';
+import { FtnPkiManager } from './components/FtnPkiManager';
+import { FtnCoreControlPlane } from './components/FtnCoreControlPlane';
 import { CommandPalette } from './components/CommandPalette';
 import { HealthTicker } from './components/HealthTicker';
+import { useServiceHealth } from './hooks/useServiceHealth.js';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('architecture');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [isLightMode, setIsLightMode] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const healthServices = useServiceHealth();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -106,9 +135,35 @@ function App() {
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'incident-correlator': return <FtnAiIncidentCorrelator />;
+      case 'zerotrust-gateway': return <FtnZeroTrustGateway />;
+      case 'netflow-collector': return <FtnNetFlowCollector />;
+      case 'pki-manager': return <FtnPkiManager />;
+      case 'multi-server': return <FtnMultiServerMesh />;
+      case 'scaling-controller': return <FtnScalingController />;
+      case 'resource-dashboard': return <FtnResourceDashboard />;
+      case 'smart-alert-engine': return <FtnSmartAlertEngine />;
+      case 'global-monitoring-hub': return <FtnGlobalMonitoringHub />;
+      case 'migration-journal': return <FtnMigrationJournal />;
+      case 'anomaly-predictor': return <FtnAiAnomalyPredictor />;
+      case 'network-heatmap': return <FtnGlobalNetworkHeatmap />;
+      case 'smart-grid-optimizer': return <FtnSmartGridOptimizer onNavigateToJournal={() => setActiveTab('migration-journal')} />;
+      case 'ecosystem-glossary': return <FtnEcosystemGlossary />;
+      case 'service-registry': return <FtnServiceRegistry />;
+      case 'status-page': return <FtnStatusPage />;
       case 'architecture': return <FtnServiceArchitecture />;
       case 'job-journal': return <FtnJobJournal />;
-      case 'audit-system': return <FtnAuditSystem />;
+      case 'access-control': return <FtnAccessControlMatrix />;
+      case 'telemetry': return <FtnTelemetryDashboard />;
+      case 'automation': return <FtnRouterAutomation />;
+      case 'smart-dns': return <FtnSmartDnsManager />;
+      case 'ai-noc': return <FtnAiPredictiveNoc />;
+      case 'provisioning': return <FtnProvisioningWizard />;
+      case 'bgp-visualizer': return <FtnBgpTrafficVisualizer />;
+      case 'protocol-selector': return <FtnProtocolSelector />;
+      case 'tunnel-health': return <FtnTunnelHealthWidget />;
+      case 'ai-proxy': return <FtnAiDynamicProxy />;
+      case 'vpn-mesh': return <FtnDynamicVpnMesh />;
       case 'ipam-manager': return <FtnIpamManager />;
       case 'policy-engine': return <FtnPolicyEngine />;
       case 'cdn-edge': return <CdnEdgeManager />;
@@ -137,7 +192,22 @@ function App() {
       case 'ai-billing': return <AiBillingGateway />;
       case 'ai-network-agent': return <AiNetworkAgent />;
       case 'android': return <OmniBuilder />;
-      case 'dashboard': return <SmartNocDashboard />;
+      case 'dashboard':
+      case 'control-plane': return <FtnCoreControlPlane onNavigate={setActiveTab} />;
+      case 'network-map': return <FtnGlobalNetworkHeatmap />;
+      case 'routers': return <MikroTikManager />;
+      case 'clients': return <SubscriberBilling />;
+      case 'ftnvpn': return <FtnDynamicVpnMesh />;
+      case 'monitoring': return <FtnGlobalMonitoringHub />;
+      case 'firmware': return <CompilerPipelineView />;
+      case 'alerts': return <FtnSmartAlertEngine />;
+      case 'dns-platform': return <FtnDnsArchitecture />;
+      case 'servers': return <FtnMultiServerMesh />;
+      case 'reports': return <FtnTelemetryDashboard />;
+      case 'ai-intelligence': return <FtnAiPredictiveNoc />;
+      case 'settings': return <FtnPolicyEngine />;
+      case 'audit-logs': return <FtnMigrationJournal />;
+      case 'smart-noc': return <SmartNocDashboard />;
       case 'mesh': return <ApiGatewayMesh />;
       case 'crypto-pki': return <CryptoPkiManager />;
       case 'backup': return <ConfigBackupManager />;
@@ -180,7 +250,7 @@ function App() {
           onOpenSharedAuth={() => setActiveTab('shared-auth')}
           onOpenBrandKit={() => setActiveTab('branding')}
         />
-        <HealthTicker />
+        <HealthTicker onNavigate={setActiveTab} />
         
         <main className="flex-1 overflow-y-auto p-6 md:p-8">
           <div className="max-w-7xl mx-auto">

@@ -3,13 +3,14 @@ import {
   Server, Network, Shield, Cpu, Activity, Globe, Globe2, 
   Terminal, Database, Play, Pause, Download, CheckCircle2, 
   AlertTriangle, Filter, Sparkles, Copy, Check, Info, 
-  Zap, Star, GitBranch, ArrowUpRight, Search, Layers, Radio, ShieldCheck, HardDrive, Sliders
+  Zap, Star, GitBranch, ArrowUpRight, Search, Layers, Radio, ShieldCheck, HardDrive, Sliders, BookOpen
 } from 'lucide-react';
 import { STACK_REPOSITORIES, PROTOCOL_COMPARISONS, STACK_LISTS, RepoItem, ProtocolComparison } from '../data/stackData';
+import { FtnEcosystemGlossary } from './FtnEcosystemGlossary';
 import { cn } from '../utils';
 
 export function MegaStackMatrix() {
-  const [activeView, setActiveView] = useState<'repos' | 'protocols' | 'telemetry' | 'kernel_ai' | 'sandbox'>('repos');
+  const [activeView, setActiveView] = useState<'repos' | 'protocols' | 'telemetry' | 'kernel_ai' | 'sandbox' | 'ecosystem'>('repos');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRepo, setSelectedRepo] = useState<RepoItem>(STACK_REPOSITORIES[0]);
@@ -139,6 +140,19 @@ export function MegaStackMatrix() {
           >
             <Terminal className="w-3.5 h-3.5" />
             Live Sandbox
+          </button>
+
+          <button
+            onClick={() => setActiveView('ecosystem')}
+            className={cn(
+              "px-3.5 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2",
+              activeView === 'ecosystem'
+                ? "bg-[#00f0ff] text-gray-950 shadow-md font-bold"
+                : "text-gray-400 hover:text-white hover:bg-gray-800/60"
+            )}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            Ecosystem Glossary
           </button>
         </div>
       </div>
@@ -915,6 +929,13 @@ export function MegaStackMatrix() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Ecosystem Glossary Deep-Dive */}
+      {activeView === 'ecosystem' && (
+        <div className="pt-2">
+          <FtnEcosystemGlossary />
         </div>
       )}
     </div>

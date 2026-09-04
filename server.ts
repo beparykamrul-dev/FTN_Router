@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import { runFTNAI } from "./src/services/ftn-ai.js";
+import authRoutes from "./src/api/authRoutes.js";
 import { CANONICAL_NAMESPACES, FTN_ARCHITECTURE_SERVICES, HEALTH_GATE_SUMMARY } from "./src/data/ftnArchitectureData.js";
 import { INITIAL_JOBS } from "./src/data/jobJournalData.js";
 import { INITIAL_AUDIT_RECORDS } from "./src/data/auditData.js";
@@ -331,94 +332,8 @@ async function startServer() {
     });
   });
 
-  // --- 3. FTN Shared Authentication: Session Endpoint ---
-  // Authoritative server-managed session check (NEVER stored in localStorage)
-  app.get("/api/v1/auth/session", (req, res) => {
-    const cookies = parseCookies(req.headers.cookie);
-    const token = cookies.ftn_session_token || req.headers.authorization?.replace("Bearer ", "") || DEFAULT_SESSION_TOKEN;
-    const session = activeSessions.get(token);
-
-    if (!session) {
-      return res.json({
-        authenticated: false,
-        identity: null,
-        provisionedServiceIds: [],
-        policy: {
-          selfRegistration: "DISABLED",
-          provisioningAuthority: "FTN Organization / Control Panel Admin",
-          storage: "SERVER_COOKIE_AUTHORITATIVE",
-        },
-      });
-    }
-
-    res.json({
-      authenticated: true,
-      identity: session,
-      provisionedServiceIds: session.provisionedServiceIds,
-      policy: {
-        selfRegistration: "DISABLED",
-        provisioningAuthority: "FTN Organization / Control Panel Admin",
-        storage: "SERVER_COOKIE_AUTHORITATIVE",
-      },
-    });
-  });
-
-  // --- 4. FTN Shared Authentication: Login Endpoint ---
-  // UX Contract:
-  // - One identity, multiple provisioned FTN services.
-  // - No public service self-registration.
-  // - Server session cookie is authoritative.
-  app.post("/api/v1/auth/login", (req, res) => {
-    const { email, passkeyOrToken } = req.body ?? {};
-
-    if (!email) {
-      return res.status(400).json({ error: "Email address or FTN Identity required." });
-    }
-
-    const normalizedEmail = String(email).trim().toLowerCase();
-    const user = PROVISIONED_USERS[normalizedEmail];
-
-    // Enforce UX Contract: NO PUBLIC SERVICE SELF-REGISTRATION
-    if (!user) {
-      return res.status(403).json({
-        error: "Access Denied: Public self-registration is disabled for FTN services.",
-        details: "Accounts are provisioned strictly via the FTN Enterprise Control Panel or family administrator. Contact your organization admin or household guardian for access.",
-        provisioningPolicy: "NO_PUBLIC_SELF_REGISTRATION",
-      });
-    }
-
-    // Generate session token
-    const token = `ftn_sess_${Date.now()}_${Math.random().toString(36).substring(2, 12)}`;
-    activeSessions.set(token, user);
-
-    // Set secure server cookie (HttpOnly; Path=/; SameSite=Lax)
-    res.cookie("ftn_session_token", token, {
-      httpOnly: true,
-      path: "/",
-      sameSite: "lax",
-      maxAge: 86400000, // 24 hours
-      secure: process.env.NODE_ENV === "production",
-    });
-
-    res.json({
-      success: true,
-      message: "Authenticated via FTN Shared Identity Federation.",
-      identity: user,
-      provisionedServiceIds: user.provisionedServiceIds,
-      token, // Also supplied for mobile/headless clients (like Flutter app)
-    });
-  });
-
-  // --- 5. FTN Shared Authentication: Logout Endpoint ---
-  app.post("/api/v1/auth/logout", (req, res) => {
-    const cookies = parseCookies(req.headers.cookie);
-    const token = cookies.ftn_session_token;
-    if (token) {
-      activeSessions.delete(token);
-    }
-    res.clearCookie("ftn_session_token", { path: "/" });
-    res.json({ success: true, message: "Logged out from all FTN provisioned services." });
-  });
+  // --- Auth Routes ---
+  app.use("/api/v1/auth", authRoutes);
 
   // --- FTN AI internal backend route ---
   app.post("/api/ftn-ai/chat", async (req, res) => {
