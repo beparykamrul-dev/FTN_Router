@@ -43,7 +43,8 @@ import {
   Compass,
   Download,
   SlidersHorizontal,
-  Bot
+  Bot,
+  BookOpen
 } from 'lucide-react';
 import {
   AreaChart,
@@ -218,7 +219,32 @@ export function FtnCoreControlPlane({ onNavigate }: { onNavigate?: (tab: string)
         </div>
 
         {/* Top Control Switches & Profile */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 lg:gap-3">
+          {/* Quick Launch Buttons */}
+          <div className="hidden xl:flex items-center gap-1.5 bg-[#091122] p-1 rounded-xl border border-gray-800 text-xs font-mono">
+            <button
+              onClick={() => onNavigate?.('setup-wizard')}
+              className="px-2.5 py-1 rounded-lg bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 hover:border-[#00f0ff] flex items-center gap-1.5 transition-all text-[11px] font-bold"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Setup Wizard</span>
+            </button>
+            <button
+              onClick={() => onNavigate?.('ecosystem-visualizer')}
+              className="px-2.5 py-1 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 hover:border-purple-400 flex items-center gap-1.5 transition-all text-[11px] font-bold"
+            >
+              <Network className="w-3.5 h-3.5" />
+              <span>Visualizer</span>
+            </button>
+            <button
+              onClick={() => onNavigate?.('ecosystem-glossary')}
+              className="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-[#00ff66] border border-emerald-500/30 hover:border-emerald-500 flex items-center gap-1.5 transition-all text-[11px] font-bold"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Glossary</span>
+            </button>
+          </div>
+
           {/* Auto Refresh Switch */}
           <div className="flex items-center gap-2 bg-[#0d1527] px-3 py-1.5 rounded-xl border border-gray-800 text-xs font-mono">
             <span className="text-gray-400 text-[11px]">Auto Refresh</span>

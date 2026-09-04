@@ -67,6 +67,9 @@ interface CommandPaletteProps {
 
 export const NAV_ITEMS = [
   { id: 'dashboard', label: '🎛️ FTN Core Control Plane (Global Autonomous NOC)', icon: LayoutDashboard },
+  { id: 'setup-wizard', label: '🚀 FTN Admin Setup Wizard (Service Onboarding & PKI)', icon: Sparkles },
+  { id: 'ecosystem-visualizer', label: '🌐 FTN Ecosystem Visualizer (Node-Link Topology)', icon: Network },
+  { id: 'ecosystem-glossary', label: '📖 FTN Ecosystem Glossary & Architecture Taxonomy', icon: BookOpen },
   { id: 'incident-correlator', label: '🚨 FTN AI Incident Correlator & Root Cause', icon: BrainCircuit },
   { id: 'zerotrust-gateway', label: '🛡️ FTN Zero Trust (ZTNA) Gateway & Posture', icon: ShieldCheck },
   { id: 'netflow-collector', label: '🌐 FTN NetFlow & IPFIX Collector', icon: Network },

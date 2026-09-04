@@ -23,7 +23,9 @@ import {
   Radio,
   HardDrive,
   Shield,
-  FileText
+  FileText,
+  Sparkles,
+  GitBranch
 } from 'lucide-react';
 import { cn } from '../utils';
 
@@ -58,6 +60,8 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
 ];
 
 export const EXTENDED_MODULES: NavItem[] = [
+  { id: 'setup-wizard', label: 'Admin Setup Wizard', icon: Sparkles, badge: 'GUIDE', badgeColor: 'bg-cyan-500/20 text-[#00f0ff] border border-cyan-500/40' },
+  { id: 'ecosystem-visualizer', label: 'Ecosystem Visualizer', icon: GitBranch, badge: 'MESH', badgeColor: 'bg-purple-500/20 text-purple-400 border border-purple-500/40' },
   { id: 'ecosystem-glossary', label: 'Ecosystem Glossary & Specs', icon: BookOpen },
   { id: 'zerotrust-gateway', label: 'Zero Trust (ZTNA) Gateway', icon: ShieldCheck },
   { id: 'netflow-collector', label: 'NetFlow & IPFIX Collector', icon: Network },
