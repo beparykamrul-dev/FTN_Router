@@ -75,6 +75,9 @@ import { FtnIdentityControlCenter } from './components/FtnIdentityControlCenter'
 import { FtnCapacityForecaster } from './components/FtnCapacityForecaster';
 import { FtnSecurityComplianceEngine } from './components/FtnSecurityComplianceEngine';
 import { FtnAnycastMeshExplorer } from './components/FtnAnycastMeshExplorer';
+import { FtnConfigValidator } from './components/FtnConfigValidator';
+import { FtnLogAggregator } from './components/FtnLogAggregator';
+import { FtnSystemPatchManager } from './components/FtnSystemPatchManager';
 import { CommandPalette } from './components/CommandPalette';
 import { HealthTicker } from './components/HealthTicker';
 import { useServiceHealth } from './hooks/useServiceHealth.js';
@@ -161,6 +164,9 @@ function App() {
       case 'capacity-forecaster': return <FtnCapacityForecaster onNavigate={setActiveTab} />;
       case 'security-compliance-engine': return <FtnSecurityComplianceEngine onNavigate={setActiveTab} />;
       case 'anycast-mesh-explorer': return <FtnAnycastMeshExplorer onNavigate={setActiveTab} />;
+      case 'config-validator': return <FtnConfigValidator />;
+      case 'log-aggregator': return <FtnLogAggregator />;
+      case 'patch-manager': return <FtnSystemPatchManager />;
       case 'service-registry': return <FtnServiceRegistry />;
       case 'status-page': return <FtnStatusPage />;
       case 'architecture': return <FtnServiceArchitecture />;
