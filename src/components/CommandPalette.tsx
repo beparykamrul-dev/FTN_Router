@@ -45,7 +45,7 @@ import {
   LayoutDashboard,
   TrendingUp,
   FileJson,
-  Database
+  FileText
 } from 'lucide-react';
 import { INITIAL_IP_POOLS } from '../data/ipamData';
 import { INITIAL_JOBS } from '../data/jobJournalData';
@@ -73,6 +73,7 @@ export const NAV_ITEMS = [
   { id: 'identity-control-center', label: '🛡️ FTN Identity & Access Control Center (mTLS & Kill Session)', icon: ShieldAlert },
   { id: 'capacity-forecaster', label: '📈 FTN Capacity Forecaster & AI Proactive Scaling (InfluxDB)', icon: TrendingUp },
   { id: 'security-compliance-engine', label: '🏆 FTN Security & RPKI Compliance Engine (ZeroTrust)', icon: ShieldCheck },
+  { id: 'compliance-audit-trail', label: '📑 FTN Compliance Audit Trail & Reports (PDF/JSON Export)', icon: FileText },
   { id: 'anycast-mesh-explorer', label: '🌍 FTN Anycast DNS Mesh Explorer (Interactive 3D D3 Globe)', icon: Globe },
   { id: 'config-validator', label: '✅ FTN YAML/JSON Config Validator (Policy Engine)', icon: FileJson },
   { id: 'log-aggregator', label: '📑 FTN Unified Log Aggregator (OpenSearch/Wazuh)', icon: Database },

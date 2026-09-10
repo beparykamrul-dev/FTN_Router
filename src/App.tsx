@@ -74,6 +74,7 @@ import { FtnEcosystemVisualizer } from './components/FtnEcosystemVisualizer';
 import { FtnIdentityControlCenter } from './components/FtnIdentityControlCenter';
 import { FtnCapacityForecaster } from './components/FtnCapacityForecaster';
 import { FtnSecurityComplianceEngine } from './components/FtnSecurityComplianceEngine';
+import { FtnComplianceAuditTrail } from './components/FtnComplianceAuditTrail';
 import { FtnAnycastMeshExplorer } from './components/FtnAnycastMeshExplorer';
 import { FtnConfigValidator } from './components/FtnConfigValidator';
 import { FtnLogAggregator } from './components/FtnLogAggregator';
@@ -163,6 +164,7 @@ function App() {
       case 'identity-control-center': return <FtnIdentityControlCenter onNavigate={setActiveTab} />;
       case 'capacity-forecaster': return <FtnCapacityForecaster onNavigate={setActiveTab} />;
       case 'security-compliance-engine': return <FtnSecurityComplianceEngine onNavigate={setActiveTab} />;
+      case 'compliance-audit-trail': return <FtnComplianceAuditTrail onNavigate={setActiveTab} />;
       case 'anycast-mesh-explorer': return <FtnAnycastMeshExplorer onNavigate={setActiveTab} />;
       case 'config-validator': return <FtnConfigValidator />;
       case 'log-aggregator': return <FtnLogAggregator />;
